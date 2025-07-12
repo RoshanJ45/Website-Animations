@@ -1,0 +1,63 @@
+<html>
+<body>
+    <style>
+        body {
+height: 100vh;
+margin: 0;
+display: grid;
+place-items: center;
+overflow: hidden;
+}
+main {
+transform-style: preserve-3d;
+perspective: 80vmin;
+}
+section {
+width: 100vmin;
+aspect-ratio: 4 / 3;
+outline: 2px dashed red;
+transform-origin: 100% 50%;
+rotate: y 40deg;
+container-type: inline-size;
+mask: linear-gradient(90deg, #0000 0 40px, #fff, #0000 calc(100% - 40px) 100%);
+div {
+width: 40px;
+aspect-ratio: 1;
+background: red;
+position: absolute;
+top: calc(var(--y) * 1%);
+background: hsl(var(--hue) 90% 60%);
+animation-name: travel;
+animation-iteration-count: infinite;
+animation-delay: calc(var(--d) * -1s);
+animation-duration: calc(var(--a) * 1s);
+}
+}
+@keyframes travel {
+0% {
+translate: 100cqi 0;
+}
+100% {
+translate: -50% 0;
+}
+}
+    </style>
+<main>
+<section id="container"></section>
+</main>
+<script>
+    const container = document.getElementById('container');
+for (let i = 0; i < 20; i++) {
+container.appendChild(document.createElement('div'));
+}
+const logos = document.querySelectorAll('div')
+for (let i = 0; i < logos.length; i++) {
+logos[i].style.setProperty('--i', i)
+logos[i].style.setProperty('--d', Math.random() * 8)
+logos[i].style.setProperty('--a', Math.random() * 8 + 4)
+logos[i].style.setProperty('--hue', Math.floor(Math.random() * 360))
+logos[i].style.setProperty('--y', Math.floor(Math.random() * 100))
+}
+</script>
+</body>
+</html>
